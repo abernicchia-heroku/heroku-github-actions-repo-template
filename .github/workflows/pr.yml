@@ -1,0 +1,15 @@
+name: Deploy PR
+
+on:
+  pull_request:
+    types: [opened, reopened, synchronize, labeled, closed]
+
+jobs:
+  build-pr:
+    runs-on: self-hosted
+    steps:
+      - uses: actions/checkout@v4
+      - uses: abernicchia-heroku/heroku-review-apps-action@main
+        with:
+          heroku-api-key: ${{secrets.HEROKU_API_KEY}}
+          heroku-pipeline-id: bbe25810-cbd3-43bb-9770-44c6c9b44b76

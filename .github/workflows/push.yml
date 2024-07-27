@@ -1,0 +1,16 @@
+name: Deploy push
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build-push:
+    runs-on: self-hosted
+    steps:
+      - uses: actions/checkout@v4
+      - uses: abernicchia-heroku/heroku-sources-endpoint-deploy-action@main
+        with:
+          heroku-api-key: ${{secrets.HEROKU_API_KEY}}
+          heroku-app-name: ab-ps-ghactions-stage # "YOUR APP's NAME" must be unique in Heroku
