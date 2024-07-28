@@ -2,6 +2,8 @@ name: Deploy PR
 
 on:
   pull_request:
+    paths-ignore:
+      - '.github/workflows/**'
     types: [opened, reopened, synchronize, labeled, closed]
 
 jobs:
