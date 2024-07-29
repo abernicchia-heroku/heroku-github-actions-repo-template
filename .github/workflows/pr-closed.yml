@@ -7,7 +7,7 @@ on:
     types: [closed]
 
 jobs:
-  build-pr:
+  close-pr:
     runs-on: self-hosted
     steps:
       - uses: abernicchia-heroku/heroku-review-apps-action@main
