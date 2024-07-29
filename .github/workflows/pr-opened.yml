@@ -1,0 +1,17 @@
+name: Deploy PR (create Review App)
+
+on:
+  pull_request:
+    paths-ignore:
+      - '.github/workflows/**'
+    types: [opened, reopened, synchronize, labeled]
+
+jobs:
+  build-pr:
+    runs-on: self-hosted
+    steps:
+      - uses: actions/checkout@v4
+      - uses: abernicchia-heroku/heroku-review-apps-action@main
+        with:
+          heroku-api-key: ${{secrets.HEROKU_API_KEY}} # set it on GitHub as secret
+          heroku-pipeline-id: ${{vars.HEROKU_REVIEWAPP_PIPELINE}} # set it on GitHub as variable at repository level
