@@ -13,5 +13,5 @@ jobs:
       - uses: actions/checkout@v4
       - uses: abernicchia-heroku/heroku-review-apps-action@main
         with:
-          heroku-api-key: ${{secrets.HEROKU_API_KEY}}
-          heroku-pipeline-id: bbe25810-cbd3-43bb-9770-44c6c9b44b76
+          heroku-api-key: ${{secrets.HEROKU_API_KEY}} # set it on GitHub as secret
+          heroku-pipeline-id: $HEROKU_REVIEWAPP_PIPELINE # set it on GitHub as variable at repository level
