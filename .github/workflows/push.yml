@@ -15,4 +15,4 @@ jobs:
       - uses: abernicchia-heroku/heroku-sources-endpoint-deploy-action@main
         with:
           heroku-api-key: ${{secrets.HEROKU_API_KEY}} # set it on GitHub as secret
-          heroku-app-name: $HEROKU_APP_NAME # set it on GitHub as variable at repository level
+          heroku-app-name: ${{vars.HEROKU_APP_NAME}} # set it on GitHub as variable at repository level
