@@ -12,11 +12,10 @@ jobs:
     steps:
       - uses: actions/checkout@v4
         with:
-          sparse-checkout-cone-mode: false
           sparse-checkout: |
-            public
+            /*
+            !.gitignore
             !.github
-            !.git
       - uses: abernicchia-heroku/heroku-review-apps-action@main
         with:
           heroku-api-key: ${{secrets.HEROKU_API_KEY}} # set it on GitHub as secret
