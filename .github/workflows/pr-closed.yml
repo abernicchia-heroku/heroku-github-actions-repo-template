@@ -10,7 +10,7 @@ jobs:
   close-pr:
     runs-on: self-hosted
     steps:
-      - uses: abernicchia-heroku/heroku-flow-action@main
+      - uses: abernicchia-heroku/heroku-review-apps-action@main
         with:
           heroku-api-key: ${{secrets.HEROKU_API_KEY}} # set it on GitHub as secret
           heroku-pipeline-id: ${{vars.HEROKU_REVIEWAPP_PIPELINE}} # set it on GitHub as variable at repository level
