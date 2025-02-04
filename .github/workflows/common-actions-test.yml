@@ -46,3 +46,69 @@ jobs:
           puts table
         RUBY
 
+  test-setup-go:
+    runs-on: self-hosted
+    
+    steps:
+    - name: Set up Go
+      uses: actions/setup-go@v4
+      with:
+        go-version: '1.21'
+    
+    - name: Run inline script
+      run: |
+        cat > script.go <<'EOG'
+        package main
+
+        import (
+            "fmt"
+            "time"
+            "runtime"
+        )
+
+        func main() {
+            fmt.Printf("Go Version: %s\n", runtime.Version())
+            fmt.Printf("Current time: %s\n", time.Now().Format(time.RFC3339))
+            fmt.Printf("GOOS: %s, GOARCH: %s\n", runtime.GOOS, runtime.GOARCH)
+        }
+        EOG
+
+        go run script.go
+
+  test-upload-download-artifacts:
+    runs-on: self-hosted
+
+    steps:
+    - name: Generate data
+      run: |
+        # Create a directory for our files
+        mkdir -p data
+        
+        # Generate some sample files
+        echo "Hello from file 1" > data/file1.txt
+        echo "Hello from file 2" > data/file2.txt
+        
+        # Create a timestamp file
+        date > data/timestamp.txt
+    
+    - name: Upload files
+      uses: actions/upload-artifact@v4
+      with:
+        name: my-files
+        path: data/
+        retention-days: 5
+    
+    - name: Process something else
+      run: echo "Doing some other work..."
+    
+    - name: Download artifacts
+      uses: actions/download-artifact@v4
+      with:
+        name: my-files
+        path: processed-data
+    
+    - name: Use downloaded files
+      run: |
+        echo "Contents of downloaded files:"
+        ls -la processed-data
+        cat processed-data/timestamp.txt
