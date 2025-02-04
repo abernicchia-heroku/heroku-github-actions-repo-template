@@ -1,0 +1,48 @@
+name: Common Actions Test
+
+on:
+  workflow_dispatch:
+    # Enables running the workflow manually
+    # https://docs.github.com/en/actions/using-workflows/events-that-trigger-workflows#workflow_dispatch
+
+jobs:
+  test-setup-ruby:
+    runs-on: self-hosted
+    
+    steps:
+    - name: Set up Ruby
+      uses: ruby/setup-ruby@v1
+      with:
+        ruby-version: '3.2'
+    
+    - name: Install required gems
+      run: |
+        gem install httparty
+        gem install terminal-table
+    
+    - name: Check API Status
+      run: |
+        ruby <<-'RUBY'
+          require 'httparty'
+          require 'terminal-table'
+          
+          ENDPOINTS = [
+            'https://api.github.com/zen',
+            'https://api.github.com/emojis'
+          ]
+          
+          results = ENDPOINTS.map do |url|
+            response = HTTParty.get(url)
+            [url, response.code, response.message]
+          rescue => e
+            [url, 'ERROR', e.message]
+          end
+          
+          table = Terminal::Table.new(
+            headings: ['Endpoint', 'Status', 'Message'],
+            rows: results
+          )
+          
+          puts table
+        RUBY
+
