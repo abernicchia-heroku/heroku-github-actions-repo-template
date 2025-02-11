@@ -16,7 +16,7 @@ jobs:
             /*
             !.gitignore
             !.github
-      - uses: abernicchia-heroku/heroku-review-apps-action@main
+      - uses: heroku-reference-apps/github-heroku-flow-action@main
         with:
           heroku-api-key: ${{secrets.HEROKU_API_KEY}} # set it on GitHub as secret
           heroku-pipeline-id: ${{vars.HEROKU_REVIEWAPP_PIPELINE}} # set it on GitHub as variable at repository level
