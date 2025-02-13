@@ -1,5 +1,5 @@
 # Project template for GitHub Actions
-A template to deploy Heroku apps via GitHub Actions on Heroku using [Heroku self-hosted runners](https://github.com/abernicchia-heroku/heroku-github-actions-runner).
+A template to deploy Heroku apps via GitHub Actions on Heroku using [Heroku self-hosted runners](https://github.com/abernicchia-heroku/heroku-github-actions-runner)...
 
 You need to copy the GitHub workflows under .github/workflows to enable the deploy of your code to Heroku apps. Those workflows require some secrets and variables that need to be set on GitHub either at Org or Repository level. To create Review Apps you need your Heroku Pipeline ID (you can retrieve it from the browser URL when you access the Pipeline from the Heroku dashboard) and a Heroku API token. To deploy Heroku apps you need to configure the app name and a Heroku API token.
 
